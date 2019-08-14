@@ -7,7 +7,7 @@ class Message extends Model
 {
     public $table = "messages";
     public $primaryKey = "id";
-    protected $fillable = ['text'];
+    protected $fillable = ['text', 'sender'];
 
     
 }

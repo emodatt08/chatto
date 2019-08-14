@@ -11,10 +11,11 @@
             //var message = messageInputField.val();
          var message ={
                 text: messageInputField.val(),
-                sender:  $.cookie('chat_name')
+                sender: $.cookie('chat_name'),
+                type: "message"
          }
-            conn.send(message);
-            messageList.prepend('<li>' + message + '</li>')
+            conn.send(JSON.stringify(message));
+            messageList.prepend('<li>' + message.text + '</li>')
             messageInputField.val('');
      });
      usernameForm.on('submit', function(e){

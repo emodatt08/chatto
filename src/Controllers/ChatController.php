@@ -20,12 +20,21 @@ class ChatController implements MessageComponentInterface{
     }
 
     public function onMessage(ConnectionInterface $from, $msg_send){
-        foreach($this->clients as $client){
-                if($client !== $from){
-                    $client->send($msg_send);
+        $msg = json_decode($msg_send);
+        switch($msg->type){
+            case "message":
+                foreach($this->clients as $client){
+                    if($client !== $from){
+                        $client->send($msg->text);
+                    }
                 }
+                Message::create(['text' => $msg->text, 'sender' => $msg->sender]);
+            break;
+
+            default:
+            break;
         }
-          Message::create(['text' => $msg_send]);
+
     }
 
      public function onClose(ConnectionInterface $conn){
