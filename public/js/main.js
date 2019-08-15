@@ -32,8 +32,13 @@
             dataType:'json',
             success: function(data){
                 $.each(data, function(){
-                    //console.log(data);
-                    messageList.prepend('<li>' + this.text + '</li>');
+                    if(this.sender == $.cookie('chat_name')){
+                        messageList.prepend('<li class="label label-success">'+ this.sender +": " +  this.text + '</li>');
+                    }else{
+                        //console.log(data);
+                        messageList.prepend('<li>'+ this.sender +": " +  this.text + '</li>');
+                    }
+
                 })
             }
         });
